@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= CONFIG_SITE_TITLE ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/aos/dist/aos.js"></script>
+
+    
+
+
+    <style>
+        main {
+            margin-top: 6rem;
+        }
+
+        h4.card-title {
+            min-height: 6rem;
+        }
+
+        #homeCarousel {
+            /* max-width:700px; */
+            margin: auto;
+        }
+
+        .carousel-caption {
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  background-color: #fff;
+  transition: background-color 0.5s ease-in-out;
+}
+
+.navbar:hover {
+  background-color: #555;
+}
+
+.navbar-brand {
+  color: #000;
+}
+
+.navbar-nav .nav-link {
+  color: #000;
+}
+
+.navbar-nav .nav-link.active {
+  color: #fff;
+  background-color: #555;
+}
+
+#toggleButton {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  cursor: pointer;
+}
+
+#toggleButton:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+body {
+  background-color: #fff;
+}
+
+#toggleButton.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+body.dark {
+  background-color: #9F98BA;
+}
+
+#scrollTopButton:hover {
+  background-color: #0056b3;
+}
+
+.bottom-right {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+
+
+        
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100">
+    <nav class="navbar navbar-expand-lg bg-body-secondary fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="http://localhost/mvc_php_new/?page=home">PHP</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <?php foreach (CONFIG_ROUTES as $key => $value) : ?>
+                        <li class="nav-item">
+                            <a class="nav-link <?php if ($page === $key) echo "active"; ?>" href="?page=<?= $key ?>">
+                                <?= $value ?>
+                            </a>
+                        </li>
+                    <?php endforeach ?>
+
+
+                    <button class="btn btn-primary" id="toggleButton">Toggle Background</button>
+
+
+                </ul>
+                <form class="d-flex" role="search">
+                    <input name="page" value="search" type="hidden">
+                    <input name="keywords" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DANS LE MAIN ON CHARGE LE TEMPLATE CORRESPONDANT A LA PAGE -->
+    <main class="flex-shrink-0 container-fluid">
+        <?php include "./views/template_" . $page . ".phtml"; ?>
+    </main>
+    <!-- TOUT LE CONTENU DANS LE TEMPLATE CORRESPONDANT EST DANS LE MAIN  -->
+<!-- Bouton de retour en haut de la page -->
+    <footer class="bg-body-secondary footer mt-auto p-3">
+        <section class="container-fluid text-center">
+           
+                <a href="http://localhost/mvc_php_new/?page=login" class="btn btn-primary" id="logout">Se deconnecter</a>
+                <div class="bottom-right">
+                <button id="scrollTopButton" onclick="scrollToTop()">^</button>
+            </div>
+            &copy; DWWM
+
+           
+
+
+
+
+
+            <script>
+
+
+
+
+
+  // Fonction pour gérer la couleur du background et la stocker dans le stockage local
+  function setBackgroundColor(color) {
+    const body = document.querySelector("body");
+    body.style.backgroundColor = color;
+    localStorage.setItem("background_color", color);
+  }
+
+  // Fonction pour récupérer la couleur du background à partir du stockage locale 
+  function getBackgroundColor() {
+    return localStorage.getItem("background_color");
+  }
+
+  // Initialiser la couleur du background quand la page charge 
+  const savedBackgroundColor = getBackgroundColor();
+  if (savedBackgroundColor) {
+    setBackgroundColor(savedBackgroundColor);
+  }
+
+  // Ajouter un add event listener au bouton pour changer le background 
+  const toggleButton = document.getElementById("toggleButton");
+  toggleButton.addEventListener("click", () => {
+    const body = document.querySelector("body");
+    const colors = ["#6F787D", "#fff", "#978B89", "#ccc", "#ff0000", "#81BDB6", "#BCE6E1", "#8EA8B9", "#09DEB0","#312C2D","#4AB4AC","#48B59D","#18B4D5","#18B4D5","C3ACD0","A0E9FF","FDCEDF","AEE2FF","4477CE","B6EADA","AACCCD","A1B6C1","BFD4E2"];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+    setBackgroundColor(color);
+  });
+
+
+  
+
+   // Fonction pour faire défiler la page vers le haut
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Pour une animation fluide, si pris en charge par le navigateur
+  });
+}
+
+
+
+AOS.init();
+
+
+</script>
+
+
+           
+        </section>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Explications de ce code 
+
+    // Ce code est une page HTML qui constitue le modèle d'une application web utilisant le modèle MVC (Modèle-Vue-Contrôleur) en PHP. Voici une explication des éléments clés de ce code :
+
+    // 1. **`<!DOCTYPE html>`** :
+    //    - Il s'agit de la déclaration du type de document HTML utilisé.
+
+    // 2. **`<html lang="en" class="h-100">`** :
+    //    - La balise `<html>` indique que le contenu de la page est écrit en HTML. L'attribut `lang="en"` spécifie que la langue par défaut est l'anglais, et la classe `class="h-100"` permet de définir la hauteur maximale de la page à 100 % de la hauteur de la fenêtre du navigateur.
+
+    // 3. **Balise `<head>`** :
+    //    - Cette section contient les métadonnées de la page, telles que la définition du jeu de caractères, les liens vers des fichiers CSS et des scripts JavaScript, et le titre de la page.
+
+    // 4. **Balise `<meta>`** :
+    //    - La balise `<meta>` définit les métadonnées de la page, telles que l'encodage des caractères et la vue initiale.
+
+    // 5. **`<title>< ?= CONFIG_SITE_TITLE ?></title>`** :
+    //    - Cette ligne définit le titre de la page en utilisant la constante `CONFIG_SITE_TITLE`. Le titre de la page sera affiché dans l'onglet du navigateur.
+
+    // 6. **Liens vers les fichiers CSS et les scripts JavaScript** :
+    //    - Plusieurs liens sont fournis pour charger des fichiers CSS (Bootstrap et AOS) et des scripts JavaScript (AOS et Bootstrap).
+
+    // 7. **Styles CSS personnalisés** :
+    //    - Cette section contient des styles CSS personnalisés qui affectent l'apparence de la page, tels que la marge supérieure du contenu principal (`main`) et la présentation des titres de carte (`h4.card-title`).
+
+    // 8. **Balise `<body>`** :
+    //    - Cette section contient le contenu principal de la page. La classe `class="d-flex flex-column h-100"` déclare que le contenu se comporte comme une colonne flexible en utilisant Flexbox, et l'attribut `h-100` indique que la hauteur de la page doit remplir la hauteur de la fenêtre.
+
+    // 9. **Barre de navigation (Navbar)** :
+    //    - La barre de navigation (navbar) est générée en utilisant Bootstrap. Elle contient le titre de l'application, un bouton de navigation pour les petits écrans, des liens vers différentes pages de l'application et un champ de recherche.
+
+    // 10. **Contenu principal (Main)** :
+    //     - Le contenu principal de la page est inclus dans la balise `<main>`. Le contenu dépend de la page en cours, et il est inclus en utilisant l'instruction `include` avec le nom de la page spécifié par la variable `$page`.
+
+    // 11. **Footer** :
+    //     - Le pied de page (footer) contient des informations sur les droits d'auteur, un bouton de déconnexion, et un code PHP qui gère la déconnexion de l'utilisateur.
+
+    // 12. **Scripts JavaScript** :
+    //     - Les fichiers JavaScript (Bootstrap et AOS) sont inclus pour ajouter des fonctionnalités interactives à la page, comme les effets d'animation AOS.
+
+    // En résumé, ce code génère la structure de base d'une page web pour une application utilisant le modèle MVC en PHP. Il inclut des styles CSS, des scripts JavaScript, une barre de navigation, le contenu principal, un pied de page et gère la déconnexion de l'utilisateur. La page est conçue pour être flexible et réactive, utilisant Bootstrap pour un design responsive. -->

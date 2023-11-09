@@ -1,0 +1,9 @@
+
+
+
+
+<form method="POST" enctype="multipart/form-data"> <!--pour uploader des fichiers il faut absolument enctype multipart/form-data sinon le formulaire transmet que des chaines de caractères -->
+
+<input  type="file" name="image_file" accept="image/*">  <!--accept="image/*" pour n'accepter que les images ; en rajoutant multiple avant type on peut uploader plusieurs fichiers-->
+    <input type="submit" name="upload" value="Upload">
+</form>

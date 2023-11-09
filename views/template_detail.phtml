@@ -1,0 +1,91 @@
+
+
+    <h1 class="mb-3 text-center"><?= $pictures['title'] ?></h1>
+
+<section class="row" >
+
+    <div class="text-center">
+    <img src="<?= $pictures['src'] ?>"  width="650px" height="650px" alt="<?= $pictures['title'] ?>">
+</div>
+
+
+
+
+
+    <div class="mb-3 text-center col-12 mt-3 fst-italic font-weight-light">
+
+    <?= $pictures['title'] ?>
+
+  
+
+
+    </div>
+
+
+
+    <div class="text-center col-12 mt-3 fst-italic font-weight-light">
+
+    <br><br>
+        
+
+    <?= $pictures['description'] ?>
+        
+
+    </div>
+
+
+
+    <div class="mb-3 text-center col-12 mt-3 fst-italic font-weight-light">
+
+    <?= $pictures['author'] ?>
+        
+    </div>
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <!-- Explications de ce code 
+
+         Ce code HTML affiche les détails d'une image, y compris le titre, l'image elle-même, la description et l'auteur. Il semble que `$pictures` soit un tableau associatif contenant les informations de l'image que vous souhaitez afficher. Voici une explication de chaque partie du code :
+
+      1. **`<h1 class="mb-3 text-center">< ?= $pictures['title'] ?></h1>`** :
+         - Cette ligne affiche le titre de l'image centré horizontalement en tant que titre principal de la page. Le titre est obtenu à partir de la clé "title" du tableau `$pictures`.
+
+      2. **`<section class="row">`** :
+         - Il s'agit d'une balise `<section>` avec la classe CSS "row". Cette balise est utilisée pour structurer le contenu de la page en lignes et colonnes.
+
+      3. **`<div class="text-center">`** :
+         - Cette balise `<div>` est centrée horizontalement et est utilisée pour afficher l'image.
+
+      4. **`<img src="< ?= $pictures['src'] ?>" width="650px" height="650px" alt="< ?= $pictures['title'] ?>">`** :
+         - Cette ligne affiche l'image. L'attribut "src" contient l'URL de l'image, l'attribut "alt" contient la description de l'image, et les attributs "width" et "height" définissent les dimensions de l'image. L'image est centrée horizontalement grâce à la classe "text-center".
+
+      5. **`<div class="mb-3 text-center col-12 mt-3 fst-italic font-weight-light">`** :
+         - Cette ligne crée une balise `<div>` centrée horizontalement. La classe "mb-3" ajoute une marge inférieure, "col-12" signifie que l'élément occupe toute la largeur de la grille, "mt-3" ajoute une marge supérieure, et "fst-italic font-weight-light" modifie le style du texte en italique et le rend plus léger.
+
+      6. **`< ?= $pictures['title'] ?>`** :
+         - Cette ligne affiche à nouveau le titre de l'image. L'information provient de la clé "title" du tableau `$pictures`.
+
+      7. **`<br><br>`** :
+         - Ces balises `<br>` insèrent deux sauts de ligne, ajoutant de l'espace entre le titre et la description de l'image.
+
+      8. **`< ?= $pictures['description'] ?>`** :
+         - Cette ligne affiche la description de l'image. L'information est extraite de la clé "description" du tableau `$pictures`.
+
+      9. **`< ?= $pictures['author'] ?>`** :
+         - Cette ligne affiche l'auteur de l'image. L'information est récupérée à partir de la clé "author" du tableau `$pictures`.
+
+      En résumé, ce code génère une page de détails pour une image spécifique en affichant le titre, l'image, la description et l'auteur. L'image est centrée horizontalement, et chaque élément est stylisé pour une présentation agréable. -->

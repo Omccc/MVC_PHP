@@ -1,0 +1,106 @@
+<h1 class="mb-3 text-center">Home</h1>
+
+<br>
+<!-- DEBUT DU CAROUSEL -->
+<div id="homeCarousel" class="carousel slide" data-bs-touch="true">
+
+
+  <!-- DIV DES BOUTONS DU CAROUSEL EN BAS -->
+  <div class="carousel-indicators"> 
+    <!-- PREMIERE BOUCLE POUR AFFICHER LES BOUTONS EN BAS
+    ON FAIT UNE BOUCLE PHP FOREACH POUR CHAQUE PIC
+    LA VARIABLE $key ICI PERMET D'AVOIR UN DECOMPTE 0,1,2 POUR FAIRE FONCTIONNER LE SLIDER -->
+    <?php foreach($pictures as $key => $pic): ?>
+    <button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="<?= $key ?>" <?php if ($key===array_key_first($pictures)) echo 'class="active" aria-current="true"'; ?> aria-label="Slide <?= $key+1 ?>"></button>
+    <?php endforeach ?>
+    <!-- FIN DE LA BOUCLE FOREACH DES BOUTONS DU BAS DU CAROUSEL -->
+  </div>
+
+
+
+
+  <!-- DIV DU CONTENU DU CAROUSEL DONC DES SLIDES -->
+  <div class="carousel-inner">
+
+<!-- DEUXIEME BOUCLE FOREACH POUR AFFICHER CHAQUE PIC AVEC SRC TITLE ET DESCRIPTION  -->
+<?php foreach($pictures as $key => $pic): ?>
+    <div class="carousel-item <?php if ($key===array_key_first($pictures)) echo 'active' ?>">
+      <img src="<?= $pic['src'] ?>" class="d-block w-100" class="img-fluid" height="750px"; alt="<?= $pic['title'] ?>">
+      <div class="carousel-caption d-none d-md-block">
+        <h5><?= $pic['title'] ?></h5>
+        <p><?= $pic['description'] ?></p>
+      </div>
+    </div>
+    <?php endforeach ?>
+
+<!-- FIN DE LA BOUCLE FOREACH -->
+
+
+<!-- FIN DIV DU CONTENU DU CAROUSEL -->
+</div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#homeCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+<!-- 
+Explications de ce code 
+
+   Ce code HTML crée une page "Home" avec un carrousel d'images en utilisant Bootstrap pour le formatage. Voici une explication de chaque partie du code :
+
+   1. **`<h1 class="mb-3 text-center">Home</h1>`** :
+      - Cette ligne affiche un titre "Home" centré horizontalement dans la page. La classe "mb-3" ajoute une marge inférieure.
+
+   2. **`<br>`** :
+      - Cette balise `<br>` insère un saut de ligne (ligne vide) pour ajouter de l'espace entre le titre et le carrousel.
+
+   3. **`<div id="homeCarousel" class="carousel slide" data-bs-touch="true">`** :
+      - C'est le début de la structure du carrousel. La classe "carousel slide" indique que c'est un carrousel. L'ID "homeCarousel" est utilisé pour cibler le carrousel via des liens de contrôle. L'attribut "data-bs-touch" permet de gérer le défilement tactile sur les appareils mobiles.
+
+   4. **`<div class="carousel-indicators">`** :
+      - Cette div contient les indicateurs du carrousel, qui sont de petits boutons en bas du carrousel qui permettent à l'utilisateur de sélectionner une diapositive spécifique.
+
+   5. **`< ?php foreach($pictures as $key => $pic): ?>`** :
+      - C'est le début d'une boucle `foreach` en PHP pour générer les boutons d'indicateur. Elle parcourt le tableau `$pictures` qui contient les images du carrousel et utilise la variable `$key` pour attribuer un index à chaque image.
+
+   6. **`<button type="button" data-bs-target="#homeCarousel" data-bs-slide-to="< ?= $key ?>" < ?php if ($key===array_key_first($pictures)) echo 'class="active" aria-current="true"'; ?> aria-label="Slide < ?= $key+1 ?>"></button>`** :
+      - Cette ligne crée un bouton d'indicateur pour chaque image du carrousel. L'attribut "data-bs-target" spécifie l'ID du carrousel à cibler. L'attribut "data-bs-slide-to" définit l'indice de la diapositive associée au bouton. Si le bouton est le premier dans la liste (`$key` égal à l'index du premier élément du tableau), il est marqué comme actif. L'attribut "aria-label" fournit un texte de description pour la diapositive.
+
+   7. **`< ?php endforeach ?>`** :
+      - C'est la fin de la boucle `foreach`. Elle marque la fin du traitement des boutons d'indicateur.
+
+   8. **`<div class="carousel-inner">`** :
+      - Cette div contient le contenu du carrousel, c'est-à-dire les diapositives.
+
+   9. **`< ?php foreach($pictures as $key => $pic): ?>`** :
+      - C'est le début d'une autre boucle `foreach` pour générer les diapositives du carrousel.
+
+   10. **`<div class="carousel-item < ?php if ($key===array_key_first($pictures)) echo 'active' ?>">`** :
+      - Cette ligne crée une diapositive du carrousel. Si c'est la première diapositive (`$key` est égal à l'index du premier élément du tableau), elle est marquée comme active. La classe "carousel-item" est utilisée pour chaque diapositive.
+
+   11. **`<img src="< ?= $pic['src'] ?>" class="d-block w-100" class="img-fluid" height="750px"; alt="< ?= $pic['title'] ?>">`** :
+      - Cette ligne affiche l'image de la diapositive. L'attribut "src" contient l'URL de l'image, l'attribut "alt" contient la description de l'image, et les classes "d-block w-100" sont utilisées pour le formatage de l'image.
+
+   12. **`<div class="carousel-caption d-none d-md-block">`** :
+      - Cette div contient le contenu textuel de la diapositive qui s'affiche en superposition de l'image. La classe "d-none d-md-block" signifie que le contenu de la diapositive sera caché sur les écrans de petite taille (mobile) mais visible sur les écrans de taille moyenne et supérieure.
+
+   13. **`<h5>< ?= $pic['title'] ?></h5>`** :
+      - Cette ligne affiche le titre de l'image de la diapositive.
+
+   14. **`<p>< ?= $pic['description'] ?></p>`** :
+      - Cette ligne affiche la description de l'image de la diapositive.
+
+   15. **`< ?php endforeach ?>`** :
+      - C'est la fin de la boucle `foreach`. Elle marque la fin du traitement des diapositives.
+
+   16. **Les deux boutons suivants** :
+      - Ces boutons permettent à l'utilisateur de passer à la diapositive précédente ou suivante dans le carrousel.
+
+   En résumé, ce code crée un carrousel d'images avec des boutons d'indicateur et du contenu textuel pour chaque image. Les images sont affichées de manière séquentielle, et l'utilisateur peut naviguer entre les diapositives à l'aide des boutons de contrôle. -->
