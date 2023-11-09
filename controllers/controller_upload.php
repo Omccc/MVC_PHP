@@ -13,6 +13,10 @@ $upload_max_filesize =  ini_get('upload_max_filesize');
 
 
 if(isset($_POST['upload'])){    // si le formulaire+ est posté/validé
+
+
+  
+       
     $tempFile = $_FILES["image_file"]["tmp_name"];
     $fileType = $_FILES["image_file"]["type"];
     $fileSize = $_FILES["image_file"]["size"];
