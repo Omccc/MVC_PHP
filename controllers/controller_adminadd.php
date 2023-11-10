@@ -6,9 +6,6 @@ $errors = [];
 $upload_max_filesize =  ini_get('upload_max_filesize');
 
 
-
-
-
 // Traitement du formulaire : si le formulaire est validé on va tenter l'upload et on insert dans la table
 
 if (isset($_POST['submit'])) {
