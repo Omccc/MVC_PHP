@@ -26,30 +26,30 @@ if(isset($_POST['upload'])){    // si le formulaire+ est posté/validé
 
 
 // //On copie le fichier temporaire vers un vrai fichier quelque part
-    // //dans notre projet..
+            // //dans notre projet..
 
-    // $tempFile = $_FILES["image_file"]["tmp_name"];
-    // $checkFile = getimagesize($tempFile);  
+            // $tempFile = $_FILES["image_file"]["tmp_name"];
+            // $checkFile = getimagesize($tempFile);  
 
-    // // $format = $checkFile[0];
+            // // $format = $checkFile[0];
 
 
-    // // Si ce n'est pas une image $checkFile retourne false !
-    // if($checkFile){
-    // ;
-    //     //$checkFile['mime'] retourne "image/jpeg" par exemple
-    //     //Donc on fait un array (tableau) qui s'appelle $tabFileName avec explode sur le slash /
+            // // Si ce n'est pas une image $checkFile retourne false !
+            // if($checkFile){
+            // ;
+            //     //$checkFile['mime'] retourne "image/jpeg" par exemple
+            //     //Donc on fait un array (tableau) qui s'appelle $tabFileName avec explode sur le slash /
 
-    //     $tabFileName = explode("/",$checkFile['mime']); 
-    // //Du coup, l'extenion de fichier c'est la clé 1 du tableau
-    // $ext = $tabFileName[1];
+            //     $tabFileName = explode("/",$checkFile['mime']); 
+            // //Du coup, l'extenion de fichier c'est la clé 1 du tableau
+            // $ext = $tabFileName[1];
 
-    //     //On peut récupérer des infos sur le ficher temporaire avec getimagesize
+            //     //On peut récupérer des infos sur le ficher temporaire avec getimagesize
 
-    // //on précise le nom du fichier basé sur un timestamp (//time() va indiquer l'heure pour chaque image pour distinguer une image d'une autre et éviter d'écraser l'image suivante, on peut donc uploader plusieurs images à la suite)
-    // $newFile = "./uploads/". time()."." . $ext; 
+            // //on précise le nom du fichier basé sur un timestamp (//time() va indiquer l'heure pour chaque image pour distinguer une image d'une autre et éviter d'écraser l'image suivante, on peut donc uploader plusieurs images à la suite)
+            // $newFile = "./uploads/". time()."." . $ext; 
 
-    // Si le fichier dépasse 30mo
+            // Si le fichier dépasse 30mo
  
     if ($fileSize > $upload_max_filesize) {
         $errors[] ="Le fichier est trop gros !";

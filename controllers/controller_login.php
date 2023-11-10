@@ -108,45 +108,37 @@
 
 // Si le formulaire est validé, on vérifie si l'utilisateur est valide
 if (isset($_POST['submit'])) {
-    $db = connectDB();
     $mail = $_POST['mail'];
     $password = $_POST['password'];
 
-    function isUserValid($db, $mail)
-    {
+    $db = connectDB();
+
+   
+    
         // Préparer la requête SQL
         $sql = $db->prepare("SELECT * FROM users WHERE mail=?");
 
         // Exécuter la requête
-        $sql->execute(array($mail));
+        $sql->execute([$mail]);
 
         // Vérifier si un utilisateur a été trouvé
         $user = $sql->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
-            return $user;
-            
-        } else {
-            return false;
+        if ($sql->rowCount() == 0){
+            $error = "Vous n'avez pas de compte veuillez pour <a href=\"?page=register\">enregistrer</a> svp.";
         }
+    
+
+        $passVerif = password_verify(strip_tags($_POST['password']),$user['password']);
+    if (!$passVerif){
+        $error = "Désolé Login/Mot-de-passe incorrect(s).";
     }
 
-    $userdb = isUserValid($db, $mail);
-
-    if ($userdb && $password === $userdb['password']) {
-        // L'utilisateur est valide, on le connecte
-        // ...
-        // Définir une variable de session pour stocker l'ID de l'utilisateur connecté
-        session_start();
-        $_SESSION['id'] = $userdb['id'];
-
-        // Rediriger l'utilisateur vers la page d'accueil
-        header("Location:?page=home");
-
-    } else {
-        // L'utilisateur n'est pas valide, on affiche une erreur
-        $error = "Votre mot de passe ou votre adresse email est incorrect, merci de réessayer.";
+    if (empty($error)){
+        $_SESSION['user'] = $user;
+        header("Location:?page=adminlist");
     }
 }
+
 
 
 // --- la vue

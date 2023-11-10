@@ -117,8 +117,37 @@ body.dark {
                             <a class="nav-link <?php if ($page === $key) echo "active"; ?>" href="?page=<?= $key ?>">
                                 <?= $value ?>
                             </a>
+
+
                         </li>
+
+                        
                     <?php endforeach ?>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu">
+                        <?php if (!isset($_SESSION['user'])): ?>
+                            <li><a class="dropdown-item" href="?page=login">Login</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="?page=register">Register</a></li>
+                            <?php else: ?>
+                            <li><a class="dropdown-item" href="?page=admin_list">Admin</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="?page=logout">Logout</a></li>
+                            <?php endif ?>
+                        </ul>
+                    </li>
+                </ul>
+
+
+
 
 
                     <button class="btn btn-primary" id="toggleButton">Toggle Background</button>
@@ -143,7 +172,7 @@ body.dark {
     <footer class="bg-body-secondary footer mt-auto p-3">
         <section class="container-fluid text-center">
            
-                <a href="http://localhost/mvc_php_new/?page=login" class="btn btn-primary" id="logout">Se deconnecter</a>
+            
                 <div class="bottom-right">
                 <button id="scrollTopButton" onclick="scrollToTop()">^</button>
             </div>

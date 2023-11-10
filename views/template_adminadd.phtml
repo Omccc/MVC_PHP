@@ -1,5 +1,27 @@
 <h1 class="mb-3 text-center">Admin Add Picture</h1>
-<form method="POST">
+
+<?php
+
+
+// Affichage des messages d'erreur et de succès
+if (!empty($errors)) : ?>
+    <div class="alert alert-danger" role="alert">
+        <?php foreach ($errors as $error) : ?>
+            <p><?= $error ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
+<?php if (isset($success)) : ?>
+    <div class="alert alert-success" role="alert">
+            <p>Le fichier a été uploadé avec succes !</p>
+    </div>
+<?php endif;
+
+?>
+
+
+
+<form method="POST" enctype="multipart/form-data">
 <div class="mb-3">
   <label for="title" class="form-label">Title</label>
   <input type="text" class="form-control" name="title" id="title" placeholder="Title">
@@ -10,7 +32,7 @@
 </div>
 <div class="mb-3">
   <label for="src" class="form-label">Source</label>
-  <input type="text" class="form-control" name="src" id="src" placeholder="URL Source">
+  <input type="file" class="form-control" name="src" id="src" placeholder="URL Source">
 </div>
 <div class="mb-3">
   <label for="author" class="form-label">Author</label>
