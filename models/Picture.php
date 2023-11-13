@@ -5,24 +5,40 @@ require_once("./services/class/Database.php"); //intégrer le système de bdd pa
 
 
 
-class Picture{
+// class Picture{
 
-    public static function getAll() {
+    
+
+//     public static function getAll() {
+
+//         $pictures = []; //au début, tableau vide
+//         $db = new Database();
+//         $pictures = $db->query("SELECT * from picture ORDER BY id DESC");
+//         return $pictures;
         
-        $pictures = []; //au début, tableau vide
-        $db = new Database();
-        $pictures = $db->query("SELECT * from picture ORDER BY id DESC");
-        return $pictures;
-        
+//     }
+
+// }
+
+
+
+
+class Picture
+{
+    private $db;
+
+    public function __construct(){
+        $this->db = new Database();
     }
 
+    public function getAll($nb=null)
+    {
+        $limit = !is_null($nb) ? "LIMIT " . $nb : "";
+        $pictures = [];
+        $pictures = $this->db->selectAll("SELECT * from picture ORDER BY id DESC ". $limit);
+        return $pictures;
+    }
 }
-
-
-
-
-
-
 
 
 

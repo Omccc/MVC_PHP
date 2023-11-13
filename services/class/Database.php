@@ -58,12 +58,13 @@ class Database{ //va nous permettre de paramétrer PDO, nous connecter et faire 
         return $this->pdo;
     }
 
-    public function query($statement,$params=[]) {
+    public function selectAll($statement,$params=[]) {
 
         $stmt = $this->getPDO()->prepare($statement);
         $stmt->execute($params);
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $result;
+        
 
     }
 
