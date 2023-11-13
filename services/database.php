@@ -13,7 +13,10 @@ function connectDB(): PDO{
 
 
 
-
+//pdo
+// configuration login mb
+// on se connecte 
+// on fait des requêtes
 
 
 

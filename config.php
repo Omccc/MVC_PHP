@@ -18,7 +18,8 @@ define("CONFIG_ROUTES",
     "register" => "Register",
     "api" => "API JSON",
     "adminlist" => "Admin List",
-    "upload" => "Upload"
+    "upload" => "Upload",
+    "mail" => "Mail"
    
 
 
