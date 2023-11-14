@@ -17,7 +17,7 @@
 
 require_once("./models/Picture.php");
 $pic = new Picture();
-$pictures = $pic->getAll(3);
+$pictures = $pic->getAll(20);
 // --- la vue
 include "./views/layout.phtml";
 

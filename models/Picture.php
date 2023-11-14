@@ -23,6 +23,7 @@ require_once("./services/class/Database.php"); //intégrer le système de bdd pa
 
 
 
+
 class Picture
 {
     private $db;
@@ -38,8 +39,15 @@ class Picture
         $pictures = $this->db->selectAll("SELECT * from picture ORDER BY id DESC ". $limit);
         return $pictures;
     }
-}
 
+    public function getOne($id=null)
+    {
+        $whereId = !is_null($id) ? "WHERE id=?" : "";
+        $picture = [];
+        $picture = $this->db->select("SELECT * from picture ". $whereId. "LIMIT 1",[$id]);
+        return $picture;
+    }
+}
 
 
 

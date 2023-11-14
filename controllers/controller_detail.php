@@ -1,22 +1,30 @@
 <?php
 
-$db = connectDB(); //se connecter à la bdd
-$id = $_GET['id'];
-//On récupère l'id depuis l'url
-//On la convertit en entier pour être plus prudent...
-$sql = $db->prepare("SELECT * FROM picture WHERE id='".$id."'");
-$sql->execute();
+// $db = connectDB(); //se connecter à la bdd
+// $id = $_GET['id'];
+// //On récupère l'id depuis l'url
+// //On la convertit en entier pour être plus prudent...
+// $sql = $db->prepare("SELECT * FROM picture WHERE id='".$id."'");
+// $sql->execute();
 
-//Le fetch tout court ne retourne qu'un seul array plat
-$pictures = $sql->fetch(PDO:: FETCH_ASSOC);
+// //Le fetch tout court ne retourne qu'un seul array plat
+// $pictures = $sql->fetch(PDO:: FETCH_ASSOC);
 
 
-//--- on charge la vue
+// //--- on charge la vue
+// include "./views/layout.phtml";
+
+
+
+
+require_once("./models/Picture.php");
+// on récupère l'id depuis l'url
+// on la convertit en entier pour être plus prudent...
+$id = intval( $_GET['id'] );
+$picModel = new Picture();
+$pic = $picModel->getOne($id);
+// --- on charge la vue
 include "./views/layout.phtml";
-
-
-
-
 
 
 

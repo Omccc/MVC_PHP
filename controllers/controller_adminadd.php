@@ -1,73 +1,136 @@
 <?php
 
-// // Si $_SESSION['user'] n'est pas défini on redirige sur le login
+// // // Si $_SESSION['user'] n'est pas défini on redirige sur le login
+// // if (!isset($_SESSION['user'])) header("Location:?page=login");
 // if (!isset($_SESSION['user'])) header("Location:?page=login");
+// $errors = [];
+// $upload_max_filesize =  ini_get('upload_max_filesize');
+
+
+// // Traitement du formulaire : si le formulaire est validé on va tenter l'upload et on insert dans la table
+
+// if (isset($_POST['submit'])) {
+
+//     $fileName= strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/','-',$_POST['title'])));
+
+
+//     // Récupération des données du formulaire
+//     $title = $_POST['title'];
+//     $description = $_POST['description'];
+//     $author = $_POST['author'];
+
+//     // Traitement du fichier
+//     $tempFile = $_FILES["src"]["tmp_name"];
+//     $fileType = $_FILES["src"]["type"];
+//     $fileSize = $_FILES["src"]["size"];
+//     $acceptedType = ["png", "jpeg"];
+//     $tabFileName = !empty($fileType) ? explode("/", $fileType) : [1 => ""];
+//     $fileExt = $tabFileName[1];
+
+//     // var_dump($_FILES);
+//     // var_dump($upload_max_filesize);
+//     // die;
+//     // Vérification de la taille du fichier
+//     if ($fileSize > $upload_max_filesize) {
+//         $errors[] = "Le fichier est trop gros !";
+//     }
+
+//     // Vérification de l'extension du fichier
+//     if (!in_array($fileExt, $acceptedType)) {
+//         $errors[] = "Le fichier doit être un .jpg, .jpeg ou .png uniquement";
+//     }
+
+//     // Upload du fichier
+//     if (empty($errors)) {
+//         $newFile = "./uploads/" .$fileName. "." . $fileExt;
+//         if (!move_uploaded_file($tempFile, $newFile)) {
+//             $errors[] = "Erreur lors de l'upload du fichier :(";
+//         }
+//     }
+
+//      /*
+//     FIN DU TRAITEMENT DU FICHIER POUR GERER L'UPLOAD
+//     */
+
+//     // Insertion dans la base de données
+//     if (empty($errors)) {
+//         $db = connectDB();
+//         $sql = $db->prepare("INSERT INTO picture (title, description, src, author) VALUES (?, ?, ?, ?)");
+//         $sql->execute([
+//             $title,
+//             $description,
+//             $newFile,
+//             $author,
+//         ]);
+
+//         // Redirection vers la page adminlist
+//         header("Location:?page=adminlist");
+//     }
+// }
+
+// // Affichage de la vue
+// include "./views/layout.phtml";
+
+// Si $_SESSION['user'] n'est pas défini on redirige sur le login
+if (!isset($_SESSION['user'])) header("Location:?page=login");
 $errors = [];
 $upload_max_filesize =  ini_get('upload_max_filesize');
 
-
-// Traitement du formulaire : si le formulaire est validé on va tenter l'upload et on insert dans la table
-
-if (isset($_POST['submit'])) {
-
-    $fileName= strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/','-',$_POST['title'])));
-
-
-    // Récupération des données du formulaire
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $author = $_POST['author'];
-
-    // Traitement du fichier
+// Si le formulaire est validé on va tenter l'upload et on insert dans la table
+if (isset($_POST['submit']) && !empty($_POST['title'])) {
+    // On récup de title brut
+    $title = strip_tags($_POST['title']);
+    // On génère un nom de fichier sans espace (avec des tirets) sans accent en minuscules...
+    $slugName = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/','-',$title)));
+    /*
+    TRAITEMENT DU FICHIER POUR GERER L'UPLOAD
+    */
     $tempFile = $_FILES["src"]["tmp_name"];
     $fileType = $_FILES["src"]["type"];
     $fileSize = $_FILES["src"]["size"];
-    $acceptedType = ["png", "jpeg"];
-    $tabFileName = !empty($fileType) ? explode("/", $fileType) : [1 => ""];
+    $acceptedType = ["png","jpeg"];
+    $tabFileName = !empty($fileType) ? explode("/",$fileType) : [1=>""];
     $fileExt = $tabFileName[1];
 
-    // var_dump($_FILES);
-    // var_dump($upload_max_filesize);
-    // die;
-    // Vérification de la taille du fichier
     if ($fileSize > $upload_max_filesize) {
-        $errors[] = "Le fichier est trop gros !";
+        $errors[] ="Le fichier est trop gros !";
     }
-
-    // Vérification de l'extension du fichier
-    if (!in_array($fileExt, $acceptedType)) {
-        $errors[] = "Le fichier doit être un .jpg, .jpeg ou .png uniquement";
+    
+    if (empty($fileSize)) {
+        $errors[] ="Fichier non traité. Vérifiez éventuellement qu'il ne soit pas trop gros...";
     }
-
-    // Upload du fichier
-    if (empty($errors)) {
-        $newFile = "./uploads/" .$fileName. "." . $fileExt;
-        if (!move_uploaded_file($tempFile, $newFile)) {
-            $errors[] = "Erreur lors de l'upload du fichier :(";
+    
+    if (!in_array($fileExt,$acceptedType)){
+        $errors[] ="Le fichier doit être un .jpg, .jpeg ou .png uniquement";
+    }
+      
+    if (empty($errors)){   
+        $newFile = "./uploads/". $slugName ."-". time() .".".$fileExt;
+        if (@move_uploaded_file($tempFile,$newFile)) {
+            $success = true;
+        } else {
+            $errors[] ="Erreur lors de l'upload du fichier :(";  
         }
     }
-
-     /*
+    /*
     FIN DU TRAITEMENT DU FICHIER POUR GERER L'UPLOAD
     */
-
-    // Insertion dans la base de données
+   
     if (empty($errors)) {
         $db = connectDB();
-        $sql = $db->prepare("INSERT INTO picture (title, description, src, author) VALUES (?, ?, ?, ?)");
+        $sql = $db->prepare("INSERT INTO picture (title, description, src, author) VALUES (?,?,?,?)");
         $sql->execute([
-            $title,
-            $description,
+            $_POST['title'],
+            $_POST['description'],
             $newFile,
-            $author,
+            $_POST['author']
         ]);
-
-        // Redirection vers la page adminlist
+        // Et on redirige sur l'admin_list
         header("Location:?page=adminlist");
     }
 }
 
-// Affichage de la vue
+// --- la vue
 include "./views/layout.phtml";
 
 
