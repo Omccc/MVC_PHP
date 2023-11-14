@@ -65,6 +65,7 @@ include "./views/layout.phtml";
 
 
 
+<<<<<<< HEAD
 // Explications de ce code 
 
 
@@ -89,3 +90,9 @@ include "./views/layout.phtml";
     //    - Une fois les données de l'image récupérées, le code inclut la vue en utilisant `include "./views/layout.phtml"`. La vue "layout.phtml" est responsable de l'affichage des informations de l'image spécifique.
 
     // En résumé, ce code se connecte à la base de données, récupère l'identifiant d'une image depuis l'URL, exécute une requête SQL pour récupérer les informations de cette image, puis affiche ces informations en utilisant la vue "layout.phtml". Il s'agit généralement d'une page de détail d'une image spécifique.
+=======
+
+
+
+    // En résumé, ce code se connecte à la base de données, récupère l'identifiant d'une image depuis l'URL, exécute une requête SQL pour récupérer les informations de cette image, puis affiche ces informations en utilisant la vue "layout.phtml". Il s'agit généralement d'une page de détail d'une image spécifique.
+>>>>>>> 7cfdd9f937be53e1303743ad699f8a0b3f865a06

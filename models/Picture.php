@@ -81,6 +81,7 @@ class Picture
 
 
 
+<<<<<<< HEAD
 
 
 // Explications de ce code 
@@ -104,3 +105,5 @@ class Picture
     //          - Le tableau des images est retourné.
         
     //     En résumé, cette classe "Picture" est conçue pour récupérer les données de la table "picture" à partir de la base de données. La méthode statique "getAll" est utilisée pour obtenir toutes les images stockées dans la table. Cela permet d'abstraire la logique de récupération des données de la base de données et de la réutiliser facilement dans d'autres parties de l'application.
+=======
+>>>>>>> 7cfdd9f937be53e1303743ad699f8a0b3f865a06

@@ -170,37 +170,3 @@ include "./views/layout.phtml";
 
 
 
-
-
-
-// Explications de ce code 
-
-
-    // Ce code gère l'authentification d'un utilisateur en vérifiant les informations de connexion saisies dans un formulaire. Voici une explication étape par étape du code :
-
-    //     1. **Validation du formulaire** :
-    //        - Le code commence par vérifier si le formulaire a été soumis en vérifiant si la clé "submit" existe dans le tableau `$_POST`. Si le formulaire a été soumis (c'est-à-dire si l'utilisateur a cliqué sur un bouton "submit" dans le formulaire), le code continue à exécuter la logique d'authentification.
-        
-    //     2. **Connexion à la base de données** :
-    //        - Une connexion à la base de données est établie en utilisant la fonction `connectDB()`. Cela crée un objet PDO qui sera utilisé pour interagir avec la base de données.
-        
-    //     3. **Récupération des données du formulaire** :
-    //        - Les données du formulaire sont récupérées à partir du tableau `$_POST`. Il s'agit de l'adresse e-mail (stockée dans la variable `$mail`) et du mot de passe (stocké dans la variable `$password`).
-        
-    //     4. **Vérification de l'utilisateur** :
-    //        - Une fonction `isUserValid` est définie pour vérifier si l'utilisateur est valide. Cette fonction prend en paramètre la connexion à la base de données (`$db`) et l'adresse e-mail de l'utilisateur (`$mail`).
-    //        - La fonction prépare une requête SQL pour sélectionner un utilisateur avec l'adresse e-mail correspondante.
-    //        - La requête est exécutée, et le résultat est récupéré dans la variable `$user` en utilisant `$sql->fetch(PDO::FETCH_ASSOC)`.
-    //        - Si un utilisateur est trouvé (c'est-à-dire si la requête retourne des données), la fonction renvoie les informations de l'utilisateur. Sinon, elle renvoie `false`.
-        
-    //     5. **Vérification du mot de passe et connexion de l'utilisateur** :
-    //        - Le code vérifie si l'utilisateur a été trouvé dans la base de données (`$userdb`) et si le mot de passe saisi (`$password`) correspond au mot de passe stocké dans la base de données (`$userdb['password']`).
-    //        - Si les informations de connexion sont valides, l'utilisateur est considéré comme connecté. Une variable de session est définie pour stocker l'ID de l'utilisateur connecté, puis l'utilisateur est redirigé vers la page d'accueil en utilisant `header("Location:?page=home")`.
-        
-    //     6. **Affichage d'une erreur en cas d'échec de l'authentification** :
-    //        - Si les informations de connexion ne sont pas valides, une variable d'erreur est définie avec un message d'erreur. Cela informe l'utilisateur que son mot de passe ou son adresse e-mail est incorrect.
-        
-    //     7. **Inclusion de la vue** :
-    //        - Enfin, le code inclut le fichier de vue "./views/layout.phtml". La vue peut contenir un message d'erreur ou une redirection vers une autre page, mais les détails spécifiques de la vue ne sont pas inclus dans le code fourni.
-        
-    //     En résumé, ce code gère l'authentification d'un utilisateur en vérifiant les informations de connexion saisies dans un formulaire, en interrogeant la base de données pour trouver l'utilisateur correspondant, puis en vérifiant le mot de passe. Si les informations sont correctes, l'utilisateur est connecté et redirigé vers la page d'accueil, sinon une erreur est affichée.
